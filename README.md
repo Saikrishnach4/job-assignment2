@@ -75,29 +75,53 @@ firebase deploy --only functions
 
 API Base URL will be like: https://us-central1-your-project-id.cloudfunctions.net/api
 
-📬 API Endpoints
-Method	  Endpoint	      Description
-POST	    /addUser	      Add new user
-GET	      /getUsers	      Fetch all users
-PUT	      /updateUser	    Update user by ID
-DELETE	  /deleteUser	    Delete user by ID
+📬 API Endpoints (Step-by-Step)
+1️⃣ Add New User
+Method: POST
 
-✅ Sample Payloads
+Endpoint: /addUser
 
-// POST /addUser
+Description: Creates a new user with name and email
+
+📦 Payload Example:
+
+json
 {
   "name": "John Doe",
   "email": "john@example.com"
 }
+2️⃣ Get All Users
+Method: GET
 
-// PUT /updateUser
+Endpoint: /getUsers
+
+Description: Fetches all user records from Firestore
+
+3️⃣ Update a User
+Method: PUT
+
+Endpoint: /updateUser
+
+Description: Updates user details by their Firestore id
+
+📦 Payload Example:
+
+json
 {
   "id": "FIRESTORE_ID_HERE",
-  "name": "John Smith",
-  "email": "johnsmith@example.com"
+  "name": "Updated Name",
+  "email": "updated@example.com"
 }
+4️⃣ Delete a User
+Method: DELETE
 
-// DELETE /deleteUser
+Endpoint: /deleteUser
+
+Description: Deletes a user from Firestore using their id
+
+📦 Payload Example:
+
+json
 {
   "id": "FIRESTORE_ID_HERE"
 }
