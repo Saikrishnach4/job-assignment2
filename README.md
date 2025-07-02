@@ -1,3 +1,4 @@
+# job-assignment2
 # 🧑‍💻 Firebase + Next.js CRUD Dashboard (TypeScript + Docker)
 
 This project is a full-stack CRUD application built with **Next.js**, **Firebase Functions (Express.js)**, and **Firestore**. It allows users to **Create**, **Read**, **Update**, and **Delete** user records via a neat UI.
@@ -75,53 +76,29 @@ firebase deploy --only functions
 
 API Base URL will be like: https://us-central1-your-project-id.cloudfunctions.net/api
 
-📬 API Endpoints (Step-by-Step)
-1️⃣ Add New User
-Method: POST
+📬 API Endpoints
+Method	  Endpoint	      Description
+POST	    /addUser	      Add new user
+GET	      /getUsers	      Fetch all users
+PUT	      /updateUser	    Update user by ID
+DELETE	  /deleteUser	    Delete user by ID
 
-Endpoint: /addUser
+✅ Sample Payloads
 
-Description: Creates a new user with name and email
-
-📦 Payload Example:
-
-json
+// POST /addUser
 {
   "name": "John Doe",
   "email": "john@example.com"
 }
-2️⃣ Get All Users
-Method: GET
 
-Endpoint: /getUsers
-
-Description: Fetches all user records from Firestore
-
-3️⃣ Update a User
-Method: PUT
-
-Endpoint: /updateUser
-
-Description: Updates user details by their Firestore id
-
-📦 Payload Example:
-
-json
+// PUT /updateUser
 {
   "id": "FIRESTORE_ID_HERE",
-  "name": "Updated Name",
-  "email": "updated@example.com"
+  "name": "John Smith",
+  "email": "johnsmith@example.com"
 }
-4️⃣ Delete a User
-Method: DELETE
 
-Endpoint: /deleteUser
-
-Description: Deletes a user from Firestore using their id
-
-📦 Payload Example:
-
-json
+// DELETE /deleteUser
 {
   "id": "FIRESTORE_ID_HERE"
 }
@@ -137,7 +114,6 @@ GitHub: [https://github.com/Saikrishnach4](https://github.com/Saikrishnach4/job-
 
 License:
 This project is for educational and demonstration purposes only.
-
 
 
 
