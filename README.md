@@ -56,7 +56,6 @@ cd job-assignment2
 cd frontend
 npm install
 npm run build
-npm run export
 
 ### 3️⃣ Run Frontend in Docker
 
