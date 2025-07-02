@@ -3,16 +3,16 @@ import admin from "firebase-admin";
 import express, { Request, Response } from "express";
 import cors from "cors";
 
-// Initialize Firebase Admin SDK
+
 admin.initializeApp();
 const db = admin.firestore();
 
-// Initialize Express App
+
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-// 📥 Create user
+
 app.post("/addUser", async (req: Request, res: Response) => {
     try {
         const data = req.body;
@@ -23,7 +23,7 @@ app.post("/addUser", async (req: Request, res: Response) => {
     }
 });
 
-// 📤 Read users
+
 app.get("/getUsers", async (_: Request, res: Response) => {
     try {
         const snapshot = await db.collection("users").get();
@@ -34,7 +34,7 @@ app.get("/getUsers", async (_: Request, res: Response) => {
     }
 });
 
-// ✏️ Update user
+
 app.put("/updateUser", async (req: Request, res: Response) => {
     try {
         const { id, ...data } = req.body;
@@ -45,7 +45,7 @@ app.put("/updateUser", async (req: Request, res: Response) => {
     }
 });
 
-// ❌ Delete user
+
 app.delete("/deleteUser", async (req: Request, res: Response) => {
     try {
         const { id } = req.body;
@@ -56,5 +56,5 @@ app.delete("/deleteUser", async (req: Request, res: Response) => {
     }
 });
 
-// 🔗 Export Cloud Function
+
 export const api = functions.https.onRequest(app);

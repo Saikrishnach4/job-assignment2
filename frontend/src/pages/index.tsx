@@ -102,7 +102,6 @@ const Home = () => {
       <ToastContainer position="top-right" autoClose={2500} />
       <h1 className="text-3xl font-bold mb-6 text-center">User Dashboard</h1>
 
-      {/* Form */}
       <div className="bg-white p-6 rounded shadow-md max-w-md mx-auto mb-8">
         <h2 className="text-xl font-semibold mb-4">
           {editId ? "Edit User" : "Add User"}
@@ -141,7 +140,7 @@ const Home = () => {
         )}
       </div>
 
-      {/* User List */}
+
       <div className="bg-white p-6 rounded shadow-md max-w-2xl mx-auto">
         {loading ? (
           <p className="text-center">Loading...</p>
