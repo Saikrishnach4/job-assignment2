@@ -38,6 +38,9 @@ job-assignment2/
 │ └── functions/ → Cloud functions code
 
 
+### ⚙️ Prerequisites
+
+> ✅ Make sure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running on your system.
 
 ---
 
