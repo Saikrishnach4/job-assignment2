@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type User = {
   id: string;
@@ -22,7 +24,8 @@ const Home = () => {
       const data = await res.json();
       setUsers(data);
     } catch (err) {
-      console.error("Failed to fetch users", err);
+      console.error(err);
+      toast.error("Error occurred while saving user");
     } finally {
       setLoading(false);
     }
@@ -30,14 +33,13 @@ const Home = () => {
 
   const handleSubmit = async () => {
     if (!name || !email) {
-      alert("Please fill all fields");
+      toast.warn("Please fill all fields");
       return;
     }
 
-    // ✅ Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+      toast.warn("Please enter a valid email address");
       return;
     }
 
@@ -46,37 +48,42 @@ const Home = () => {
       const res = await fetch(`${API_BASE}/${endpoint}`, {
         method: editId ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          editId ? { id: editId, name, email } : { name, email }
-        ),
+        body: JSON.stringify(editId ? { id: editId, name, email } : { name, email }),
       });
+
       if (res.ok) {
+        toast.success(`User ${editId ? "updated" : "added"} successfully`);
         setName("");
         setEmail("");
         setEditId(null);
         fetchUsers();
       } else {
-        alert("Failed to save user");
+        toast.error("Failed to save user");
       }
     } catch (err) {
       console.error(err);
-      alert("Error occurred");
+      toast.error("Error occurred while saving user");
     }
   };
 
-
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure?")) return;
+    if (!confirm("Are you sure you want to delete this user?")) return;
     try {
       const res = await fetch(`${API_BASE}/deleteUser`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
-      if (res.ok) fetchUsers();
-      else alert("Delete failed");
+
+      if (res.ok) {
+        toast.success("User deleted");
+        fetchUsers();
+      } else {
+        toast.error("Failed to delete user");
+      }
     } catch (err) {
       console.error(err);
+      toast.error("Error occurred while saving user");
     }
   };
 
@@ -92,6 +99,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <ToastContainer position="top-right" autoClose={2500} />
       <h1 className="text-3xl font-bold mb-6 text-center">User Dashboard</h1>
 
       {/* Form */}
@@ -104,14 +112,14 @@ const Home = () => {
           placeholder="Name"
           className="w-full p-2 mb-3 border rounded"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
           className="w-full p-2 mb-3 border rounded"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button
           onClick={handleSubmit}
@@ -141,7 +149,7 @@ const Home = () => {
           <p>No users found.</p>
         ) : (
           <ul className="space-y-4">
-            {users.map(user => (
+            {users.map((user) => (
               <li
                 key={user.id}
                 className="p-4 border rounded bg-gray-50 shadow-sm flex justify-between items-center"
