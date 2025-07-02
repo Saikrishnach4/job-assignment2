@@ -1,8 +1,7 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+// next.config.js (CommonJS format for Vercel compatibility)
+const nextConfig = {
   reactStrictMode: true,
   output: "export",
 };
 
-export default nextConfig;
+module.exports = nextConfig;
